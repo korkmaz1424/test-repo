@@ -4,17 +4,14 @@ jobs:
   download:
     runs-on: ubuntu-latest
     steps:
-    - name: Depoyu Kontrol Et
-      uses: actions/checkout@v4
-      
-    - name: Dunyanin En Guclu Indirme Motorunu Kur
+    - name: Dunyanin En Guncel Motorunu Kur
       run: |
         sudo curl -L https://github.com -o /usr/local/bin/yt-dlp
         sudo chmod a+rx /usr/local/bin/yt-dlp
         
-    - name: Bot Korumasini Gececek Parametrelerle Videoyu Kopar
+    - name: YouTube Mobil Uygulama Kimligiyle Videoyu Indir
       run: |
-        yt-dlp --no-check-certificate --no-warnings --prefer-free-formats --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" -f "best[ext=mp4]" "https://youtube.com"
+        yt-dlp --no-check-certificate --no-warnings --extractor-args "youtube:player_client=android,web_embedded" -f "best[ext=mp4]" "https://youtube.com"
         
     - name: Videoyu Paketle ve Bilgisayara Gonder
       uses: actions/upload-artifact@v4
