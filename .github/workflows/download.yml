@@ -4,19 +4,12 @@ jobs:
   download:
     runs-on: ubuntu-latest
     steps:
-    - name: Dunyanin En Guncel Motorunu Kur
+    - name: Videoyu Engelsiz Sunucudan Cek
       run: |
-        sudo curl -L https://github.com -o /usr/local/bin/yt-dlp
-        sudo chmod a+rx /usr/local/bin/yt-dlp
-        
-    - name: YouTube Mobil Uygulama Kimligiyle Videoyu Indir
-      run: |
-        yt-dlp --no-check-certificate --no-warnings --extractor-args "youtube:player_client=android,web_embedded" -f "best[ext=mp4]" "https://youtube.com"
-        
+        curl -k -L -o "BLOK3_Sebebi_Yar.mp4" "https://catbox.moe"
     - name: Videoyu Paketle ve Bilgisayara Gonder
       uses: actions/upload-artifact@v4
       with:
-        name: sarkim
+        name: video-klip
         path: ./*.mp4
-
 
