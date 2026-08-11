@@ -12,4 +12,3 @@ jobs:
       with:
         name: sarkim
         path: ./*.mp3
-
