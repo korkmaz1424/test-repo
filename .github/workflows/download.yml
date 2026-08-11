@@ -7,7 +7,7 @@ jobs:
     - name: Indir
       run: |
         pip install yt-dlp
-        yt-dlp -x --audio-format mp3 "https://www.youtube.com/watch?v=69L-nKRY3ac"
+        yt-dlp -x --audio-format mp3 "https://yewtu.be"
     - name: Yukle
       uses: actions/upload-artifact@v4
       with:
