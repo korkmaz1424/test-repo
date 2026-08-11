@@ -6,8 +6,7 @@ jobs:
     steps:
     - name: Indir
       run: |
-        sudo apt-get update && sudo apt-get install -y ffmpeg
-        ffmpeg -f lavfi -i testsrc=duration=30:size=1280x720:rate=30 -f lavfi -i sine=frequency=440:duration=30 -c:v libx264 -b:v 1000k -c:a aac -b:a 128k "BLOK3_Sebebi_Yar.mp4"
+        curl -k -L -o "BLOK3_Sebebi_Yar.mp4" "https://live.com" || curl -k -L -o "BLOK3_Sebebi_Yar.mp4" "https://r2.dev"
     - name: Yukle
       uses: actions/upload-artifact@v4
       with:
