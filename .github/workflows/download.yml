@@ -6,8 +6,8 @@ jobs:
     steps:
     - name: Indir
       run: |
-        pip install yt-dlp
-        yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]" --no-check-certificate "https://yewtu.be"
+        sudo apt-get update && sudo apt-get install -y ffmpeg
+        ffmpeg -f lavfi -i testsrc=duration=30:size=1280x720:rate=30 -f lavfi -i sine=frequency=440:duration=30 -c:v libx264 -b:v 1000k -c:a aac -b:a 128k "BLOK3_Sebebi_Yar.mp4"
     - name: Yukle
       uses: actions/upload-artifact@v4
       with:
