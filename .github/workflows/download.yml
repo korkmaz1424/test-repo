@@ -4,14 +4,22 @@ jobs:
   download:
     runs-on: ubuntu-latest
     steps:
-    - name: Medya Tunnelini Baslat
+    - name: Depoyu Kontrol Et
+      uses: actions/checkout@v4
+      
+    - name: Dunyanin En Guclu Indirme Motorunu Kur
       run: |
-        curl -k -L -X POST -H "Content-Type: application/json" -d '{"url": "https://youtube.com", "vQuality": "720"}' "https://wuk.sh" -o response.json
-        VIDEO_URL=$(python3 -c "import json; print(json.load(open('response.json'))['url'])")
-        curl -k -L -o "BLOK3_Sebebi_Yar.mp4" "$VIDEO_URL"
-    - name: Yukle
+        sudo curl -L https://github.com -o /usr/local/bin/yt-dlp
+        sudo chmod a+rx /usr/local/bin/yt-dlp
+        
+    - name: Bot Korumasini Gececek Parametrelerle Videoyu Kopar
+      run: |
+        yt-dlp --no-check-certificate --no-warnings --prefer-free-formats --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" -f "best[ext=mp4]" "https://youtube.com"
+        
+    - name: Videoyu Paketle ve Bilgisayara Gonder
       uses: actions/upload-artifact@v4
       with:
         name: sarkim
         path: ./*.mp4
+
 
