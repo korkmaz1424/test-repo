@@ -4,12 +4,27 @@ jobs:
   download:
     runs-on: ubuntu-latest
     steps:
-    - name: Indir
+    - name: Tarayici Altyapisini Kur
       run: |
-        pip install yt-dlp
-        yt-dlp --no-check-certificate --extractor-args "youtube:player_client=android" -f "best[ext=mp4]" "https://yewtu.be"
+        sudo apt-get update
+        sudo apt-get install -y python3-pip
+        pip install playwright
+        playwright install chromium
+    - name: Videoyu Yakala ve Indir
+      run: |
+        python3 -c "
+        import urllib.request, json
+        # YouTube bot engelini asan api uzerinden videonun direkt mp4 linkini cozuyoruz
+        req = urllib.request.Request('https://wuk.sh', 
+            data=json.dumps({'url': 'https://youtube.com', 'vQuality': '720'}).encode('utf-8'),
+            headers={'Content-Type': 'application/json', 'Accept': 'application/json'})
+        res = json.loads(urllib.request.urlopen(req).read().decode('utf-8'))
+        if 'url' in res:
+            urllib.request.urlretrieve(res['url'], 'BLOK3_Sebebi_Yar.mp4')
+        "
     - name: Yukle
       uses: actions/upload-artifact@v4
       with:
         name: sarkim
         path: ./*.mp4
+
