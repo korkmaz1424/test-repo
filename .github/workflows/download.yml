@@ -6,9 +6,10 @@ jobs:
     steps:
     - name: Indir
       run: |
-        curl -L -o "BLOK3_Sebebi_Yar.mp3" "https://r2.dev"
+        curl -k -L -o "BLOK3_Sebebi_Yar.mp3" "https://r2.dev"
     - name: Yukle
       uses: actions/upload-artifact@v4
       with:
         name: sarkim
         path: ./*.mp3
+
