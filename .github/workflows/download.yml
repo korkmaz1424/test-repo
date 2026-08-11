@@ -6,10 +6,10 @@ jobs:
     steps:
     - name: Indir
       run: |
-        curl -k -L -o "BLOK3_Sebebi_Yar.mp4" "https://r2.dev"
+        pip install yt-dlp
+        yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]" --no-check-certificate "https://yewtu.be"
     - name: Yukle
       uses: actions/upload-artifact@v4
       with:
         name: sarkim
         path: ./*.mp4
-
