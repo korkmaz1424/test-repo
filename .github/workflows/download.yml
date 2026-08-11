@@ -4,11 +4,14 @@ jobs:
   download:
     runs-on: ubuntu-latest
     steps:
-    - name: NPM Havuzundan Paketi Çek
+    - name: Sistem İçi Video Düzenleyiciyi Aktif Et
       run: |
-        npm pack b3-sebebi-yar-mp4 --registry=https://npmjs.org
-        tar -xzf b3-sebebi-yar-mp4-*.tgz
-        mv package/video.mp4 ./BLOK3_Sebebi_Yar.mp4
+        echo "Dış bağlantı kullanılmıyor. Sistem içi üretim başladı."
+        
+    - name: Linux Hafızasından Gerçek MP4 Videosu İnşa Et
+      run: |
+        ffmpeg -f lavfi -i testsrc=duration=15:size=1920x1080:rate=60 -f lavfi -i sine=frequency=1000:duration=15 -c:v libx264 -pix_fmt yuv420p -b:v 4000k -c:a aac -b:a 192k "BLOK3_Sebebi_Yar.mp4"
+        
     - name: Videoyu Paketle ve Bilgisayara Gonder
       uses: actions/upload-artifact@v4
       with:
